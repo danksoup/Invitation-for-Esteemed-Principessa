@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>An Invitation for Principessa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --vibrant-amaranth: #B24C72; 
+            --deep-slate: #2C3E50;
+            --vintage-white: #FDF5F7;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--vintage-white);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+            overflow: hidden;
+            font-family: 'Pinyon Script', cursive;
+        }
+
+        .screen {
+            position: absolute;
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-in-out;
+            z-index: 10;
+        }
+
+        .hidden { 
+            opacity: 0 !important; 
+            visibility: hidden !important; 
+            pointer-events: none !important;
+        }
+
+        /* --- STAGE 1 --- */
+        .intro-text {
+            font-size: 38px;
+            color: var(--vibrant-amaranth);
+            line-height: 1.2;
+            margin-bottom: 40px;
+            font-weight: 900;
+        }
+
+        .action-btn {
+            padding: 12px 30px;
+            background: white;
+            border: 3px solid var(--vibrant-amaranth);
+            color: var(--vibrant-amaranth);
+            font-family: 'Pinyon Script', cursive;
+            font-size: 32px;
+            font-weight: 900;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(178, 76, 114, 0.15);
+        }
+
+        /* --- STAGE 2 --- */
+        .envelope-container {
+            width: 90%;
+            cursor: pointer;
+        }
+
+        .envelope-img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.2));
+        }
+
+        .seal-prompt {
+            font-size: 40px;
+            color: var(--vibrant-amaranth);
+            margin-top: 25px;
+            font-weight: 900;
+        }
+
+        /* --- STAGE 3: THE CARD --- */
+        .card-frame {
+            width: 100%;
+            aspect-ratio: 3 / 4.7;
+            background-image: url('https://i.postimg.cc/j2zd5tG6/Blush-Vintage-Aesthetic-Background.jpg');
+            background-size: 100% 100%;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+        }
+
+        .card-inner {
+            position: absolute;
+            top: 16%; 
+            bottom: 18%;
+            left: 14%;
+            right: 14%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            color: var(--deep-slate);
+            text-align: center;
+        }
+
+        .header {
+            font-size: 28px;
+            color: var(--vibrant-amaranth);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .label {
+            font-size: 20px;
+            color: var(--vibrant-amaranth);
+            font-weight: 900;
+            margin-bottom: -5px;
+        }
+
+        .details {
+            font-size: 19px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .small-script {
+            font-size: 15px;
+            font-weight: 900;
+            display: block;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .closing-block {
+            margin-top: 10px;
+        }
+
+        .closing-main {
+            font-size: 24px;
+            color: var(--vibrant-amaranth);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .closing-sub {
+            font-size: 17px;
+            color: var(--deep-slate);
+            font-weight: 900;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .confetti {
+            position: fixed;
+            z-index: 1000;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgm" loop>
+        <source src="https://files.catbox.moe/9qmjn5.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="screen1" class="screen">
+        <p class="intro-text">
+            My dear principessa,<br>
+            might I be so bold as to request the honour of your presence 
+            on a most delightful outing?
+        </p>
+        <button class="action-btn" onclick="next('screen1', 'screen2')">I Shall Attend</button>
+    </div>
+
+    <div id="screen2" class="screen hidden">
+        <div class="envelope-container" onclick="openLetter();">
+            <img src="https://i.postimg.cc/fbrbqHc7/Adobe-Express-file.png" class="envelope-img">
+        </div>
+        <p class="seal-prompt">Break the seal, principessa...</p>
+    </div>
+
+    <div id="screen3" class="screen hidden">
+        <div class="card-frame">
+            <div class="card-inner">
+                <div class="header">An Invitation for My Dear Principessa</div>
+                
+                <div class="details">
+                    <div class="label">Date:</div>
+                    10/05/2026
+                </div>
+
+                <div class="details">
+                    <div class="label">Time:</div>
+                    11:00 AM – 4:00 PM<br>
+                    <span class="small-script">(with a graceful departure at 3:30 PM)</span>
+                </div>
+
+                <div class="details">
+                    <div class="label">Location:</div>
+                    Craft Coffee—where we shall sip overpriced beverages and behave like nobility
+                </div>
+
+                <div class="details">
+                    <div class="label">Dress Code:</div>
+                    Something lovely, as is only expected of you
+                </div>
+
+                <div class="closing-block">
+                    <span class="closing-main">Pray do not refuse—</span>
+                    <span class="closing-sub">for I am quite certain I should take it very personally.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function next(curr, nxt) {
+            document.getElementById(curr).classList.add('hidden');
+            document.getElementById(nxt).classList.remove('hidden');
+        }
+
+        function openLetter() {
+            document.getElementById('bgm').play().catch(e => {});
+            next('screen2', 'screen3');
+            celebrate();
+        }
+
+        function celebrate() {
+            const items = ['🌹', '❤️', '✨', '🌸', '🥂'];
+            for (let i = 0; i < 65; i++) {
+                const p = document.createElement('div');
+                p.className = 'confetti';
+                p.innerText = items[Math.floor(Math.random() * items.length)];
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = '-40px';
+                p.style.fontSize = (Math.random() * 15 + 20) + 'px';
+                document.body.appendChild(p);
+
+                p.animate([{ top: '-40px', opacity: 1 }, { top: '100dvh', opacity: 0, transform: `rotate(720deg)` }], 
+                { duration: 3000 + Math.random() * 2000 }).onfinish = () => p.remove();
+            }
+        }
+    </script>
+</body>
+</html>
